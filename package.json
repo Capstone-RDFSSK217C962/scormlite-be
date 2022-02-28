@@ -2,12 +2,13 @@
   "name": "scormlite",
   "version": "1.0.0",
   "private": true,
+  "engines": {
+    "node": "14.16.1"
+  },
   "scripts": {
-    "dev": "node ace serve --watch",
-    "build": "node ace build --production",
-    "start": "node server.js",
-    "lint": "eslint . --ext=.ts",
-    "format": "prettier --write ."
+    "build": "node ace build --prod",
+    "start": "node ace serve --watch",
+    "start:prod": "node ./build/server.js"
   },
   "devDependencies": {
     "@adonisjs/assembler": "^5.3.8",
@@ -33,6 +34,7 @@
     "luxon": "^2.3.1",
     "mysql": "^2.18.1",
     "npm": "^8.5.2",
+    "pg": "^8.7.3",
     "phc-bcrypt": "^1.0.7",
     "proxy-addr": "^2.0.7",
     "reflect-metadata": "^0.1.13",
