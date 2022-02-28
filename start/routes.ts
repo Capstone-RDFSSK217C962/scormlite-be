@@ -19,7 +19,36 @@
 */
 
 import Route from '@ioc:Adonis/Core/Route'
+// import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
-Route.get('/', async () => {
-  return { hello: 'world' }
-})
+// Route.get('/', async () => {
+//   return { hello: 'world' }
+// }).as('home')
+
+// Route.get('/test/:b', async ({ params, request }: HttpContextContract) => {
+//   let a: number = 12
+//   console.log(request.completeUrl)
+//   /** console.log(request.qs())*/
+//   return { hello: a + parseInt(params.b) }
+// }).as('aaa')
+
+// Route.get('/users', 'UsersController.index').as('user.index')
+// Route.post('/users', 'UsersController.store').as('user.store')
+// Route.get('/users/:id', 'UsersController.show').as('user.show')
+// Route.put('/users/:id', 'UsersController.update').as('user.update')
+// Route.delete('/users/:id', 'UsersController.destroy').as('user.destroy')
+
+Route.resource('users', 'UsersController').apiOnly()
+
+Route.post('/register', 'AuthController.register').as('auth.register')
+
+Route.post('/login', 'AuthController.login').as('auth.login')
+
+// Route.resource('/courses', 'CoursesController').apiOnly().middleware('auth')
+
+Route.post('/courses', 'CoursesController.store').as('auth.store').middleware(['auth', 'verify'])
+// Route.post('/courses', 'CoursesController.store').as('auth.store').middleware({'*': 'auth'})
+
+Route.get('/courses', 'CoursesController.index').as('auth.index').middleware('auth')
+
+Route.post('/verify-otp', 'AuthController.otpConfirmation').as('auth.otpVerify')
