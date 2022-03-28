@@ -49,7 +49,7 @@ export default class UsersController {
       let newUser = new User()
       newUser.name = request.input('name')
       newUser.email = request.input('email')
-      newUser.phone = request.input('phone')
+      // newUser.phone = request.input('phone')
 
       await newUser.save()
       // console.log(newUser.$isPersisted)
@@ -91,7 +91,7 @@ export default class UsersController {
     let user = await User.findOrFail(id)
     user.email = request.input('email')
     user.name = request.input('name')
-    user.phone = request.input('phone')
+    // user.phone = request.input('phone')
     user.save()
 
     return response.ok({ message: 'updated' })
