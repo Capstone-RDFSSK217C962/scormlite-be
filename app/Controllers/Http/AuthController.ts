@@ -13,12 +13,10 @@ export default class AuthController {
 
       const otp_code = Math.floor(100000 + Math.random() * 900000)
 
-      let saveCode = await Database.table('otp_codes').insert({
+      await Database.table('otp_codes').insert({
         otp_code: otp_code,
         user_id: newUser.id,
       })
-
-      saveCode();
 
       await Mail.send((message) => {
         message
@@ -64,9 +62,9 @@ export default class AuthController {
     let user = await User.findBy('email', email)
     let otpCheck = await Database.query().from('otp_codes').where('otp_code', otp_code).first()
 
-    if (user?.id == otpCheck.user_id) {
-      user!.isVerified = true
-      await user?.save
+    if (user && user.id == otpCheck.user_id) {
+      user.isVerified = true
+      user.save()
       return response.status(200).json({ message: 'berhasil konfirmasi OTP' })
     } else {
       return response.status(400).json({ message: 'gagal verifikasi OTP' })
