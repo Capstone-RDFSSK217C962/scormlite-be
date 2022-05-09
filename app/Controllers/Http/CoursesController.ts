@@ -5,7 +5,6 @@ import CreateCourseValidator from 'App/Validators/CreateCourseValidator'
 export default class CoursesController {
   public async index({ response }: HttpContextContract) {
     const courses = await Course.query().preload('author')
-    // console.log(courses)
 
     return response.ok({ message: 'success fetch courses', data: courses })
   }

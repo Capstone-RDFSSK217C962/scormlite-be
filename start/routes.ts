@@ -51,4 +51,22 @@ Route.post('/courses', 'CoursesController.store').as('auth.store').middleware(['
 
 Route.get('/courses', 'CoursesController.index').as('auth.index').middleware('auth')
 
+Route.get('/modules', 'ModulesController.index').as('module.index')
+Route.post('/modules', 'ModulesController.store').as('module.store')
+
+Route.get('/components', 'ComponentsController.index').as('component.index')
+Route.post('/components', 'ComponentsController.store').as('component.store')
+
+Route.post('/texts', 'TextsController.store').as('text.store')
+Route.get('/texts', 'TextsController.index').as('text.index')
+
+Route.post('/videos', 'VideosController.store').as('video.store')
+Route.get('/videos', 'VideosController.index').as('video.index')
+
+Route.post('/references', 'ReferencesController.store').as('reference.store')
+Route.get('/references', 'ReferencesController.index').as('reference.index')
+
+Route.post('/quizzes', 'QuizzesController.store').as('quiz.store')
+Route.get('/quizzes', 'QuizzesController.index').as('quiz.index')
+
 Route.post('/verify-otp', 'AuthController.otpConfirmation').as('auth.otpVerify')
